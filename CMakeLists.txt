@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(office_scenario)
+project(looped_mission_planner)
 
 if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 14)
@@ -13,16 +13,16 @@ endif()
 find_package(ament_cmake_auto REQUIRED)
 ament_auto_find_build_dependencies()
 
-set(OFFICE_SCENARIO_SRC
-  src/office_scenario_core.cpp)
+set(LOOPED_MISSION_PLANNER_SRC
+  src/looped_mission_planner_core.cpp)
 
-set(OFFICE_SCENARIO_HEADERS
-  include/office_scenario/office_scenario_core.hpp)
+set(LOOPED_MISSION_PLANNER_HEADERS
+  include/looped_mission_planner/looped_mission_planner_core.hpp)
 
 ament_auto_add_executable(${PROJECT_NAME}
-  src/office_scenario_node.cpp
-  ${OFFICE_SCENARIO_SRC}
-  ${OFFICE_SCENARIO_HEADERS}
+  src/looped_mission_planner_node.cpp
+  ${LOOPED_MISSION_PLANNER_SRC}
+  ${LOOPED_MISSION_PLANNER_HEADERS}
 )
 
 if(BUILD_TESTING)

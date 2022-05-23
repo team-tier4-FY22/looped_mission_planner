@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef OFFICE_SCENARIO__OFFICE_SCENARIO_CORE_HPP_
-#define OFFICE_SCENARIO__OFFICE_SCENARIO_CORE_HPP_
+#ifndef LOOPED_MISSION_PLANNER__LOOPED_MISSION_PLANNER_CORE_HPP_
+#define LOOPED_MISSION_PLANNER__LOOPED_MISSION_PLANNER_CORE_HPP_
 
 #include <rclcpp/rclcpp.hpp>
 
@@ -21,15 +21,21 @@
 #include <autoware_auto_vehicle_msgs/msg/engage.hpp>
 #include <tier4_planning_msgs/msg/velocity_limit.hpp>
 #include <nav_msgs/msg/odometry.hpp>
+#include <rosbag2_cpp/converter_interfaces/serialization_format_serializer.hpp>
+#include <rosbag2_cpp/readers/sequential_reader.hpp>
+#include <rosbag2_cpp/storage_options.hpp>
+#include <rosbag2_cpp/typesupport_helpers.hpp>
+
 #include <string>
 
-class OfficeScenario : public rclcpp::Node
+class LoopedMissionPlanner : public rclcpp::Node
 {
 public:
-  OfficeScenario();
-  ~OfficeScenario();
+  LoopedMissionPlanner();
+  ~LoopedMissionPlanner();
 
 private:
+  void loadGoalRosbag();
   void callbackOdometry(const nav_msgs::msg::Odometry::ConstSharedPtr odom_msg_ptr);
   void timerCallback();
 
@@ -50,10 +56,14 @@ private:
   double goal_a_px_, goal_a_py_, goal_b_px_, goal_b_py_;
   double goal_a_qz_, goal_a_qw_, goal_b_qz_, goal_b_qw_;
 
+  std::vector<geometry_msgs::msg::Pose> pose_checkpoints_;
+
+  std::string rosbag_path_;
   double goal_tolerance_;
   bool going_to_point_a_;
   double timer_dt_;
   int lap_num_;
+  int num_checkpoints_;
 };
 
-#endif  // OFFICE_SCENARIO__OFFICE_SCENARIO_CORE_HPP_
+#endif  // LOOPED_MISSION_PLANNER__LOOPED_MISSION_PLANNER_CORE_HPP_

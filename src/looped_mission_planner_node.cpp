@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "office_scenario/office_scenario_core.hpp"
+#include "looped_mission_planner/looped_mission_planner_core.hpp"
 
 #include <rclcpp/rclcpp.hpp>
 
@@ -21,7 +21,7 @@
 int main(int argc, char ** argv)
 {
   rclcpp::init(argc, argv);
-  auto node = std::make_shared<OfficeScenario>();
+  auto node = std::make_shared<LoopedMissionPlanner>();
   rclcpp::spin(node);
   rclcpp::shutdown();
 
